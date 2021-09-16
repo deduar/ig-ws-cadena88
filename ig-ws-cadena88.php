@@ -18,7 +18,7 @@ if ( is_admin() || ( defined( 'WP_CLI' ) && WP_CLI ) ) {
 
     require_once( _IGWSC88_DIR . 'inc/igWSCadena88.class.php' );    
     $wsc88 = new igWSCadena88();  
-    //$igWSCadena88->init();
+    $wsc88->init();
 
     // activation
     register_activation_hook( __FILE__, [ $wsc88, 'activation' ] );    

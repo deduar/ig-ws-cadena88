@@ -10,6 +10,63 @@
 class igWSCadena88
 {
 
+    public function init()
+    {
+        // crear menús de administración
+        add_action('admin_menu', [$this, 'addAdminMenu']);
+
+        // scripts backend    
+        add_action('admin_enqueue_scripts', [$this, 'addScripts']);
+    }
+
+    /**
+     * menus
+     * @desc inclusión de menus y submenús al Plugin
+     */
+    public function addAdminMenu() {
+        // main menu
+        add_menu_page('IG WS Cadena88', 'IG WS C88', 'manage_options', 'ig-ws-c88', [ $this, 'pageDashboard' ], 'dashicons-visibility');
+        // submenus
+        add_submenu_page('ig-ws-c88', 'SubMenu 1', 'SubMenu 1', 'manage_options', "ig-ws-c88-submenu-1", [ $this, 'pageSubMenu1' ] );
+        add_submenu_page('ig-ws-c88', 'SubMenu 2', 'SubMenu 2', 'manage_options', "ig-ws-c88-submenu-2", [ $this, 'pageSubMenu2' ] );
+        // opciones
+        //add_options_page ('IG WS Cadena88 Option', 'IG WS Cadena88', 'manage_options', 'ig-ws-cadena88.php', 'my_plugin_page' );
+    }
+
+    /**
+     * Pagina: dashboard
+     */
+    public function pageDashboard() {
+        include _IGWSC88_DIR.'admin/dashboard.php';
+    }
+
+    public function pageSubmenu1 () { 
+        echo "SubMenu1";
+    }
+    public function pageSubmenu2 () { 
+        echo "SubMenu2";
+    }
+
+    /**
+     * Scripts
+     * @desc inclusión de scripts a nuestro plugin
+     */
+    public function addScripts() {
+
+        $_pages = [
+            'ig-ws-c88',
+            'ig-ws-c88-submenu-1',
+            'ig-ws-c88-submenu-2'
+        ];       
+
+        // cargar scripts sólo en las páginas de nuestro plugin
+        if ( in_array(FILTER_INPUT(INPUT_GET, 'page'), $_pages )) {    
+            wp_enqueue_style( 'ig-ws-c88-css', _IGWSC88_DIR_URL . 'assets/css/style.css', [], null, false );
+            wp_enqueue_script( 'ig-ws-c88-js', _IGWSC88_DIR_URL . 'assets/js/test.js', [], null, false );
+        }
+
+    }
+
     /**
      * Activación del Plugin
      * @desc creación de tablas personalizadas 
