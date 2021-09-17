@@ -24,13 +24,13 @@
                             <tr>
                                 <div class="form-group">
                                     <td><label for="wdslUsername">Username </label></td>
-                                    <td><input type="text" class="form-control" name="wdslUsername" id="wdslUsername" placeholder=""></td>
+                                    <td><input type="text" class="form-control" name="wdslUsername" id="wdslUsername" value="<?php if(isset($_POST['wdslUsername'])){echo $_POST['wdslUsername'];}else{echo $settings['wdslUsername'];} ?>"></td>
                                 </div>
                             </tr>
                             <tr>
                                 <div class="form-group">
                                     <td><label for="wdslPassword">Password </label></td>
-                                    <td><input type="password" class="form-control" name="wdslPassword" id="wdslPassword" placeholder=""></td>
+                                    <td><input type="password" class="form-control" name="wdslPassword" id="wdslPassword" value="<?php if(isset($_POST['wdslPassword'])){echo $_POST['wdslPassword'];}else{echo $settings['wdslPassword'];} ?>"></td>
                                 </div>
                             </tr>
                             <tr>
