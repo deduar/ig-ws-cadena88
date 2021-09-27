@@ -29,7 +29,7 @@ class igWSCadena88
         add_menu_page('IG WS Cadena88', 'IG WS C88', 'manage_options', 'ig-ws-c88', [$this, 'pageDashboard'], 'dashicons-visibility');
         // submenus
         add_submenu_page('ig-ws-c88', 'Settings', 'Settings', 'manage_options', "ig-ws-c88-setings", [$this, 'pageSetting']);
-        add_submenu_page('ig-ws-c88', 'SubMenu 2', 'SubMenu 2', 'manage_options', "ig-ws-c88-submenu-2", [$this, 'pageSubMenu2']);
+        add_submenu_page('ig-ws-c88', 'Familias AECOC', 'Familias AECOC', 'manage_options', "ig-ws-c88-familiasAECOC", [$this, 'pageFamiliasAECOC']);
         // opciones
         //add_options_page ('IG WS Cadena88 Option', 'IG WS Cadena88', 'manage_options', 'ig-ws-cadena88.php', 'my_plugin_page' );
     }
@@ -44,13 +44,12 @@ class igWSCadena88
 
     public function pageSetting()
     {
-        $settings = $this->getSettings();
         include _IGWSC88_DIR . 'admin/settings.php';
     }
 
-    public function pageSubmenu2()
+    public function pageFamiliasAECOC()
     {
-        echo "SubMenu2";
+        include _IGWSC88_DIR . 'admin/familiasAECOC.php';
     }
 
     /**
@@ -96,22 +95,19 @@ class igWSCadena88
         dbDelta($sql);
     }
 
-    public function getSettings(){
-        global $wpdb;
-        $table = $wpdb->prefix . 'igwsc88';
+    public function testWS(){
 
-        $sqlInitialWSDL = 'SELECT description FROM ' . $table . ' WHERE `name` = \'initialWDSL\'';
-        $initalWDSL = $wpdb->get_var($sqlInitialWSDL);
+        $wsdl = "https://intranet.cadena88.com/integracion/ws_cadena88.php?wsdl";
+        $clientOptions = array('login' => '28636', 'password' => 'ZSMW6H');
+        $client = new SoapClient($wsdl, $clientOptions);
+        var_dump($client);
 
-        $sqlWDSLUsername = 'SELECT description FROM ' . $table . ' WHERE `name` = \'wdslUsername\'';
-        $WDSLUsername = $wpdb->get_var($sqlWDSLUsername);
+        //$parameters = array('cliente' => '28636','centro'=>'C004');
+        //$result = $client->catalogo($parameters);
 
-        $sqlWDSLPassword = 'SELECT description FROM ' . $table . ' WHERE `name` = \'wdslPassword\'';
-        $WDSLPassword = $wpdb->get_var($sqlWDSLPassword);
-
-        $settings = ['initialWDSL' => $initalWDSL,'wdslUsername' => $WDSLUsername, 'wdslPassword' => $WDSLPassword];
-
-        return $settings;
+        //$result = $client->webservice($parameters);
+        
+        return "123";
     }
 
 }
