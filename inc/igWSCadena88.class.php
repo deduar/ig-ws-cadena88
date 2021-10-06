@@ -30,6 +30,7 @@ class igWSCadena88
         // submenus
         add_submenu_page('ig-ws-c88', 'Settings', 'Settings', 'manage_options', "ig-ws-c88-setings", [$this, 'pageSetting']);
         add_submenu_page('ig-ws-c88', 'Familias AECOC', 'Familias AECOC', 'manage_options', "ig-ws-c88-familiasAECOC", [$this, 'pageFamiliasAECOC']);
+        add_submenu_page('ig-ws-c88', 'Productos', 'Productos', 'manage_options', "ig-ws-c88-productos", [$this, 'pageProductos']);
         // opciones
         //add_options_page ('IG WS Cadena88 Option', 'IG WS Cadena88', 'manage_options', 'ig-ws-cadena88.php', 'my_plugin_page' );
     }
@@ -50,6 +51,11 @@ class igWSCadena88
     public function pageFamiliasAECOC()
     {
         include _IGWSC88_DIR . 'admin/familiasAECOC.php';
+    }
+
+    public function pageProductos()
+    {
+        include _IGWSC88_DIR . 'admin/productos.php';
     }
 
     /**
